@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import './App.css'
 
 import Movie from './components/Movie'
 
 function App() {
-    const [time, setTime] = useState(0)
-
-
 
     return (
         <div>
@@ -19,11 +15,13 @@ function App() {
             />
 
             <main>
+
                 <Movie
                     title="Hunger Games"
                     actors='Catnies Everdeen'
                     bookAuthor='Unknown'
                 />
+
             </main>
 
             <footer>
