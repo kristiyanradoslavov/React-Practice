@@ -5,13 +5,26 @@ import Clear from "./Clear";
 import Increment from "./Increment";
 
 export default function Movie(props) {
-    const [time, setTime] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
     const [count, changeCount] = useState(0);
 
     setTimeout(() => {
-        setTime(time + 1);
+        if (seconds === 59) {
+            setMinutes(minutes + 1);
+            setSeconds(0);
+        } else {
+
+            setSeconds(seconds + 1);
+        }
 
     }, 1000);
+
+
+    const incrementCount = () => {
+        changeCount(oldCount => oldCount + 1);
+
+    }
 
 
     return (
@@ -23,14 +36,20 @@ export default function Movie(props) {
             </h1>
 
             <h2>
-                current time is {time}
+                current time is {minutes}:{seconds}
             </h2>
 
             <h3>
                 <p>Count: {count}</p>
-                <Decrement changeFunc={changeCount} currentCount={count} />
+                <Decrement changeFunc={changeCount} currentCount={count}>
+                    <span>-</span>
+                </Decrement>
+
                 <Clear changeFunc={changeCount} />
-                <Increment changeFunc={changeCount} currentCount={count} />
+
+                <Increment incrementFunc={incrementCount}>
+                    <span>+</span>
+                </Increment>
 
             </h3>
         </header>
