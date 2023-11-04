@@ -1,8 +1,12 @@
 import { useState } from "react";
 
+import Decrement from "./Decrement";
+import Clear from "./Clear";
+import Increment from "./Increment";
+
 export default function Movie(props) {
     const [time, setTime] = useState(0);
-    const [count, changeCount] = useState(0)
+    const [count, changeCount] = useState(0);
 
     setTimeout(() => {
         setTime(time + 1);
@@ -24,9 +28,10 @@ export default function Movie(props) {
 
             <h3>
                 <p>Count: {count}</p>
-                <button onClick={() => changeCount(count + 1)}>
-                    Click this for action
-                </button>
+                <Decrement changeFunc={changeCount} currentCount={count} />
+                <Clear changeFunc={changeCount} />
+                <Increment changeFunc={changeCount} currentCount={count} />
+
             </h3>
         </header>
     );
