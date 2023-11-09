@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
 import SIngleTableRow from "./SingleTableRow";
 import * as userService from "../services/userService";
+import CreateUser from "./CreateUser";
 
 export default function Table() {
 
     const [users, setUser] = useState([]);
+    const [addUserModal, setAddUserModal] = useState(false);
 
     useEffect(() => {
         userService.getAllUsers()
             .then(result => setUser(result))
 
     }, []);
+
+    const clickHandler = () => {
+        setAddUserModal(true);
+    }
+
+    const closeAddUserModal = () => {
+        setAddUserModal(false);
+    }
 
     return (
         <div className="table-wrapper">
@@ -86,6 +96,8 @@ export default function Table() {
           <h2>Failed to fetch</h2>
       </div> */}
             {/* </div> */}
+
+            {addUserModal && <CreateUser closeAddModal={closeAddUserModal} />}
 
             <table className="table">
                 <thead>
@@ -201,6 +213,8 @@ export default function Table() {
 
                 </tbody>
             </table>
+
+            <button className="btn-add btn" onClick={clickHandler}>Add new user</button>
         </div>
     );
 }
