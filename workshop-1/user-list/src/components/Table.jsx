@@ -22,6 +22,32 @@ export default function Table() {
         setAddUserModal(false);
     }
 
+    const createUserHandler = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+        const formInformation = {
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            email: formData.get('email'),
+            imageUrl: formData.get('imageUrl'),
+            phoneNumber: formData.get('phoneNumber'),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            address: {
+                country: formData.get('country'),
+                city: formData.get('city'),
+                street: formData.get('street'),
+                streetNumber: formData.get('streetNumber'),
+            }
+
+        }
+        const newUser = await userService.addNewUser(formInformation);
+        // setUser(oldUsers => [...oldUsers, newUser])
+
+        closeAddUserModal();
+    }
+
     return (
         <div className="table-wrapper">
             {/* Overlap components  */}
@@ -97,7 +123,12 @@ export default function Table() {
       </div> */}
             {/* </div> */}
 
-            {addUserModal && <CreateUser closeAddModal={closeAddUserModal} />}
+            {addUserModal &&
+                <CreateUser
+                    closeAddModal={closeAddUserModal}
+                    addUserHandler={createUserHandler}
+                />
+            }
 
             <table className="table">
                 <thead>

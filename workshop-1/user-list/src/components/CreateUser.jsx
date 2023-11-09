@@ -1,6 +1,6 @@
 export default function CreateUser({
     closeAddModal,
-    
+    addUserHandler,
 }) {
 
 
@@ -20,7 +20,7 @@ export default function CreateUser({
                             </svg>
                         </button>
                     </header>
-                    <form>
+                    <form onSubmit={addUserHandler}>
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="firstName">First name</label>
